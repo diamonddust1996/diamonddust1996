@@ -1,0 +1,20 @@
+Sub Macro1()
+'
+' Macro1 Macro
+'
+Dim SearchText As String
+Dim Count As Range
+Dim CountInt As Integer
+
+SearchText = Cells(1, 7).Value
+
+Set Count = Range("A1:A100").Find(What:=SearchText, LookIn:=xlValues, LookAt:=xlWhole, SearchOrder:=xlByColumns, SearchDirection:=xlNext)
+If Count Is Nothing Then
+    CountInt = 0
+Else
+    CountInt = Cells(Range(Count.Address).Row, Range(Count.Address).Column + 1)
+End If
+
+MsgBox CountInt
+'
+End Sub
