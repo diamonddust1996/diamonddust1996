@@ -4,17 +4,31 @@ Sub Macro1()
 '
 Dim SearchText As String
 Dim Count As Range
-Dim CountInt As Integer
+Dim BeforeCountInt As Integer
+Dim AfterCountInt As Integer
+Dim aryDrvNo(1000) As String
+Dim aryCount(1000) As Integer
+Dim i = 0 As Integer
+Dim MRsMsg
+
+BeforeCountInt = 0
+AfterCountInt = 0
 
 SearchText = Cells(1, 7).Value  'セルG1
 
 Set Count = Range("A1:A100").Find(What:=SearchText, LookIn:=xlValues, LookAt:=xlWhole, SearchOrder:=xlByColumns, SearchDirection:=xlNext)
-If Count Is Nothing Then
-    CountInt = 0
-Else
-    CountInt = Cells(Range(Count.Address).Row, Range(Count.Address).Column + 1)
-End If
+If Not Count Is Nothing Then BeforeCountInt = Cells(Range(Count.Address).Row, Range(Count.Address).Column + 1)
 
-MsgBox CountInt
+Set Count = Range("A1:A100").Find(What:=SearchText, LookIn:=xlValues, LookAt:=xlWhole, SearchOrder:=xlByColumns, SearchDirection:=xlNext)
+If Not Count Is Nothing Then AfterCountInt = Cells(Range(Count.Address).Row, Range(Count.Address).Column + 1)
+If AfterCountInt > BeforeCountInt Then
+    aryCount(i) = AfterCountInt - BeforeCountInt
+    aryDrvNo(i) = DrvNo
+    i = i + 1
+
+For i = LBound(aryCount) To UBound(aryCount)
+    MRsMsg = "MR-sが検出されました！" & VbCrLf & "発生ドライブと個数は以下の通りです。" & VbCrLf
+    MRsMsg = MRsMsg  & VbCrLf & "Drv." & aryDrvNo(i) & "：" & aryCount(i) & "個"
+MsgBox MRsMsg
 '
 End Sub
