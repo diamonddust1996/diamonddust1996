@@ -32,3 +32,31 @@ For i = LBound(aryCount) To UBound(aryCount)
 MsgBox(MRsMsg, vbCritical, "MR-S検出")
 '
 End Sub
+
+
+
+
+
+Dim myExcel As New Excel.Application
+        Dim xlBooks As Excel.Workbooks : Dim xlBook As Excel.Workbook
+        Dim xlSheet As Excel.Worksheet : Dim xlRange As Excel.Range
+        Dim FilePath As String = "H:\Datas.xls"
+        Dim c As Excel.Range
+        Dim SearchText As String = "ネコ"
+        Dim firstAddress As String
+
+        xlBooks = myExcel.Workbooks
+        xlBook = xlBooks.Open(FilePath)
+        'xlBook = xlBooks.Add '新規
+        xlSheet = xlBook.Sheets.Item(1)
+        xlRange = xlSheet.Range("A1")
+
+        c = xlSheet.Cells.Find(What:=SearchText, LookIn:=Excel.XlFindLookIn.xlValues, LookAt:=Excel.XlLookAt.xlWhole, MatchCase:=True, MatchByte:=True)
+        If (Not c Is Nothing) Then
+            firstAddress = c.Address
+            Do
+                '処理
+
+                c = xlSheet.Cells.FindNext(c)
+            Loop While Not c Is Nothing And c.Address <> firstAddress
+        End If
