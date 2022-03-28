@@ -1,0 +1,29 @@
+Private Delegate Sub ButtonOnDelegate()
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        ButtonOff()
+        'DoSomethingメソッドを別のスレッドで実行する
+        'Threadオブジェクトを作成する
+        Dim t As New System.Threading.Thread(New System.Threading.ThreadStart( _
+        AddressOf DoSomething))
+        t.IsBackground = True
+        'スレッドを開始する
+        t.Start()
+    End Sub
+
+    '別スレッドで実行するメソッド
+    Private Sub DoSomething()
+        Dim ButtonOnDlg As New ButtonOnDelegate(AddressOf ButtonOn)
+        MsgBox("test")
+        Me.Invoke(ButtonOnDlg)
+    End Sub
+
+    Private Sub ButtonOn()
+        Button1.Enabled = True
+        TextBox1.Enabled = True
+    End Sub
+
+    Private Sub ButtonOff()
+        Button1.Enabled = False
+        TextBox1.Enabled = False
+    End Sub
