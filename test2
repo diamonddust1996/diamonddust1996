@@ -1,0 +1,31 @@
+Private Declare Function GetPrivateProfileString Lib "kernel32" _
+ Alias "GetPrivateProfileStringA" ( _
+                              ByVal lpAppName As String, _
+                              ByVal lpKeyName As String, _
+                              ByVal lpDefault As String, _
+                              ByVal lpReturnedString As StringBuilder, _
+                              ByVal nSize As Integer, _
+                              ByVal lpFileName As String) As Integer
+
+    Private Declare Function WritePrivateProfileString Lib "kernel32" _
+Alias "WritePrivateProfileStringA" (ByVal lpApplicationName As String, _
+                                    ByVal lpKeyName As String, _
+                                    ByVal lpString As String, _
+                                    ByVal lpFileName As StringBuilder) As Integer
+
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
+        Dim sb1_1 As StringBuilder = New StringBuilder(300)
+        Dim iniFileName = "C:\temp\Setting.ini"
+
+        GetPrivateProfileString("SECTION_1", "KEY_1", "エラー", sb1_1, 15, iniFileName)
+
+        MsgBox(sb1_1.ToString)
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
+        Dim iniFileName As New StringBuilder(300)
+        iniFileName.Append("C:\temp\Setting.ini")
+        WritePrivateProfileString("SECTION_2", "KEY_1", "Hello world", iniFileName)
+    End Sub
+
+End Class
