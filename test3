@@ -1,0 +1,70 @@
+Set obj = Wscript.CreateObject("Shell.Application")
+if Wscript.Arguments.Count = 0 then
+	obj.ShellExecute "wscript.exe", """" & WScript.ScriptFullName & """" & " runas", "", "runas", 1
+	Wscript.Quit
+end if
+
+Dim objWSH
+Set objWSH = CreateObject("WScript.Shell")
+objWSH.Run "cmd /c ""for %%| in (""*.txt"") do (notepad.exe %%|)""",1,True
+
+
+Dim strText
+Dim oWshShell,objExcel
+Dim objWShell
+
+strText = "1"
+
+With CreateObject("Scripting.FileSystemObject")
+Set objWShell = CreateObject("WScript.Shell")
+WScript.Sleep 2500
+'objWShell.AppActivate "ファイルを開く"
+WScript.Sleep 500
+objWShell.SendKeys strText
+objWShell.SendKeys "{ENTER}"
+
+
+End With
+
+'WScript.Quit
+
+
+'Option Explicit
+'On Error Resume Next
+
+Const vbHide = 0             'ウィンドウを非表示
+Const vbNormalFocus = 1      '通常のウィンドウで、最前面のウィンドウ
+Const vbMinimizedFocus = 2   '最小化で、最前面のウィンドウ
+Const vbMaximizedFocus = 3   '最大化で、最前面のウィンドウ
+Const vbNormalNoFocus = 4    '通常のウィンドウで、最前面ではない
+Const vbMinimizedNoFocus = 6 '最小化で、最前面にはならない
+
+Dim objFSO
+Dim objFile
+Dim strText,aryFile,ShukuSen,Trimto
+Dim oWshShell,objExcel
+Dim regX
+Dim i
+Dim objWShell
+
+
+With CreateObject("Scripting.FileSystemObject")
+Set objWShell = CreateObject("WScript.Shell")
+Set objExcel = WScript.CreateObject("Excel.Application.12")
+
+objExcel.Application.Visible = True
+objWShell.AppActivate objExcel.Caption
+Dim objBook
+Set objBook = objExcel.Workbooks.Open(.GetFolder(".") & "\Book1.xls")
+Dim App
+Set App = objBook.Application
+objWShell.AppActivate objExcel.Caption
+objWShell.Run "input.vbs",0,False
+App.Run "Sample1"
+
+
+Set objExcel = Nothing
+
+End With
+
+'WScript.Quit
