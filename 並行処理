@@ -1,6 +1,9 @@
-Private Delegate Sub ButtonOnDelegate()
+Imports System.Text
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+Public Class Form1
+    Private Delegate Sub ButtonOnDelegate()
+
+    Private Sub Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         ButtonOff()
         'DoSomethingメソッドを別のスレッドで実行する
         'Threadオブジェクトを作成する
@@ -14,16 +17,79 @@ Private Delegate Sub ButtonOnDelegate()
     '別スレッドで実行するメソッド
     Private Sub DoSomething()
         Dim ButtonOnDlg As New ButtonOnDelegate(AddressOf ButtonOn)
-        MsgBox("test")
         Me.Invoke(ButtonOnDlg)
     End Sub
 
     Private Sub ButtonOn()
         Button1.Enabled = True
-        TextBox1.Enabled = True
     End Sub
 
     Private Sub ButtonOff()
         Button1.Enabled = False
-        TextBox1.Enabled = False
     End Sub
+
+    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
+    End Sub
+
+    Private Declare Function GetPrivateProfileString Lib "kernel32" _
+ Alias "GetPrivateProfileStringA" ( _
+                              ByVal lpAppName As String, _
+                              ByVal lpKeyName As String, _
+                              ByVal lpDefault As String, _
+                              ByVal lpReturnedString As StringBuilder, _
+                              ByVal nSize As Integer, _
+                              ByVal lpFileName As String) As Integer
+
+    Private Declare Function WritePrivateProfileString Lib "kernel32" _
+Alias "WritePrivateProfileStringA" (ByVal lpApplicationName As String, _
+                                    ByVal lpKeyName As String, _
+                                    ByVal lpString As String, _
+                                    ByVal lpFileName As StringBuilder) As Integer
+    Dim iniFolder As String = "..\..\ini"
+
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
+        Dim sb1_1 As StringBuilder = New StringBuilder(300)
+        Dim iniFileName = "..\..\ini\Setting.ini"
+
+
+        GetPrivateProfileString("SECTION_1", "KEY_1", "", sb1_1, 15, iniFileName)
+
+        MsgBox(sb1_1.ToString)
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
+        Dim iniFileName As New StringBuilder(300)
+
+        Try
+            If Not System.IO.Directory.Exists(iniFolder) Then _
+            System.IO.Directory.CreateDirectory(iniFolder)
+        Catch ex As Exception
+            MsgBox("iniフォルダ作成で例外発生")
+        End Try
+
+
+        iniFileName.Append("..\..\ini\Setting.ini")
+
+        WritePrivateProfileString("SECTION_1", "KEY_1", "Hello world", iniFileName)
+    End Sub
+
+    Private Sub Form1_Closing(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Closing
+        Dim iniFileName As New StringBuilder(300)
+
+        iniFileName.Append("..\..\ini\Setting.ini")
+
+        WritePrivateProfileString("SECTION_1", "KEY_1", "Close", iniFileName)
+    End Sub
+
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub Settings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Settings.Click
+        Dim f As New Settings()
+        f.StartPosition = FormStartPosition.CenterParent
+        f.ShowDialog(Me)
+        f.Dispose()
+    End Sub
+End Class
