@@ -1,0 +1,12 @@
+@echo off
+
+rem -------------------------------------------------------
+rem 「アプリケーションと安全でないファイルの起動」を編集
+rem 0:有効にする ★
+rem 1:ダイアログを表示する
+rem 3:無効にする
+rem -------------------------------------------------------
+
+Reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3" /v "1806" /t REG_DWORD /d "0" /f
+
+pause
