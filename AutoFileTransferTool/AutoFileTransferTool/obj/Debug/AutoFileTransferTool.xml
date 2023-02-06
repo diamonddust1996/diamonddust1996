@@ -1,0 +1,58 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+AutoFileTransferTool
+</name>
+</assembly>
+<members>
+<member name="T:AutoFileTransferTool.My.Resources.Resources">
+<summary>
+  ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
+</summary>
+</member>
+<member name="P:AutoFileTransferTool.My.Resources.Resources.ResourceManager">
+<summary>
+  このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
+</summary>
+</member>
+<member name="P:AutoFileTransferTool.My.Resources.Resources.Culture">
+<summary>
+  厳密に型指定されたこのリソース クラスを使用して、すべての検索リソースに対し、
+  現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
+</summary>
+</member>
+<member name="M:AutoFileTransferTool.SettingsForm.WritePrivateProfileString(System.String,System.String,System.String,System.String)">
+ <summary>
+ iniファイル書き込み関数
+ </summary>
+ <param name="lpAppName">セクション名</param>
+ <param name="lpKeyName">キー名</param>
+ <param name="lpString">書き込む文字列</param>
+ <param name="lpFileName">iniファイル名</param>
+ <returns></returns>
+</member>
+<member name="M:AutoFileTransferTool.NormalMode_Form.GetPrivateProfileString(System.String,System.String,System.String,System.Text.StringBuilder,System.Int32,System.String)">
+ <summary>
+ iniファイル読み込み関数
+ </summary>
+ <param name="lpAppName">セクション名</param>
+ <param name="lpKeyName">キー名</param>
+ <param name="lpDefault">キーが見つからなかった場合に取得するデフォルト値</param>
+ <param name="lpReturnedString">取得した文字列が入るバッファ</param>
+ <param name="nSize">取得した文字列のバッファサイズ</param>
+ <param name="lpFileName">iniファイル名</param>
+ <returns></returns>
+</member>
+<member name="M:AutoFileTransferTool.NormalMode_Form.GetPrivateProfileInt(System.String,System.String,System.Int32,System.String)">
+ <summary>
+ iniファイル読み込み関数(整数値用)
+ </summary>
+ <param name="lpAppName">セクション名</param>
+ <param name="lpKeyName">キー名</param>
+ <param name="nDefault">キーが見つからなかった場合に取得するデフォルト値</param>
+ <param name="lpFileName">iniファイル名</param>
+ <returns></returns>
+</member>
+</members>
+</doc>
