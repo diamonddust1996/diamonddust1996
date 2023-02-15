@@ -103,7 +103,7 @@ Partial Class MDTMode_Form
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(5, 2, 0, 2)
-        Me.MenuStrip1.Size = New System.Drawing.Size(782, 28)
+        Me.MenuStrip1.Size = New System.Drawing.Size(782, 24)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -142,7 +142,7 @@ Partial Class MDTMode_Form
         '
         Me.SourceSettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ネットワーク接続確認を有効ToolStripMenuItem, Me.サブフォルダーも含めるToolStripMenuItem})
         Me.SourceSettingsToolStripMenuItem.Name = "SourceSettingsToolStripMenuItem"
-        Me.SourceSettingsToolStripMenuItem.Size = New System.Drawing.Size(79, 24)
+        Me.SourceSettingsToolStripMenuItem.Size = New System.Drawing.Size(79, 20)
         Me.SourceSettingsToolStripMenuItem.Text = "監視設定"
         '
         'ネットワーク接続確認を有効ToolStripMenuItem
@@ -165,14 +165,14 @@ Partial Class MDTMode_Form
         '
         Me.TransferSettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.転送動作ToolStripMenuItem, Me.ToolStripMenuItem1, Me.SHA1方式でベリファイToolStripMenuItem})
         Me.TransferSettingsToolStripMenuItem.Name = "TransferSettingsToolStripMenuItem"
-        Me.TransferSettingsToolStripMenuItem.Size = New System.Drawing.Size(79, 24)
+        Me.TransferSettingsToolStripMenuItem.Size = New System.Drawing.Size(79, 20)
         Me.TransferSettingsToolStripMenuItem.Text = "転送設定"
         '
         '転送動作ToolStripMenuItem
         '
         Me.転送動作ToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.一時フォルダにコピーしてから転送ToolStripMenuItem, Me.直接転送ToolStripMenuItem})
         Me.転送動作ToolStripMenuItem.Name = "転送動作ToolStripMenuItem"
-        Me.転送動作ToolStripMenuItem.Size = New System.Drawing.Size(179, 26)
+        Me.転送動作ToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.転送動作ToolStripMenuItem.Text = "転送動作"
         '
         '一時フォルダにコピーしてから転送ToolStripMenuItem
@@ -193,7 +193,7 @@ Partial Class MDTMode_Form
         '
         Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MD5方式ToolStripMenuItem, Me.SHA1方式ToolStripMenuItem})
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(179, 26)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(181, 26)
         Me.ToolStripMenuItem1.Text = "ベリファイ"
         '
         'MD5方式ToolStripMenuItem
@@ -216,7 +216,7 @@ Partial Class MDTMode_Form
         '
         Me.SHA1方式でベリファイToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.元のファイルを削除するToolStripMenuItem, Me.指定したフォルダに移動するToolStripMenuItem})
         Me.SHA1方式でベリファイToolStripMenuItem.Name = "SHA1方式でベリファイToolStripMenuItem"
-        Me.SHA1方式でベリファイToolStripMenuItem.Size = New System.Drawing.Size(179, 26)
+        Me.SHA1方式でベリファイToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.SHA1方式でベリファイToolStripMenuItem.Text = "元ファイルの処理"
         '
         '元のファイルを削除するToolStripMenuItem
@@ -242,27 +242,27 @@ Partial Class MDTMode_Form
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.BackColor = System.Drawing.SystemColors.Control
+        Me.StatusStrip1.BackColor = System.Drawing.Color.Snow
         Me.StatusStrip1.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatusTextLabel, Me.StatusText})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 381)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 379)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 33, 0)
-        Me.StatusStrip1.Size = New System.Drawing.Size(782, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(782, 24)
         Me.StatusStrip1.TabIndex = 2
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'StatusTextLabel
         '
         Me.StatusTextLabel.Name = "StatusTextLabel"
-        Me.StatusTextLabel.Size = New System.Drawing.Size(70, 19)
+        Me.StatusTextLabel.Size = New System.Drawing.Size(70, 17)
         Me.StatusTextLabel.Text = "ステータス："
         '
         'StatusText
         '
         Me.StatusText.Name = "StatusText"
-        Me.StatusText.Size = New System.Drawing.Size(67, 19)
+        Me.StatusText.Size = New System.Drawing.Size(67, 17)
         Me.StatusText.Text = "起動完了"
         '
         'Panel1
@@ -468,7 +468,7 @@ Partial Class MDTMode_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.Firebrick
+        Me.BackColor = System.Drawing.Color.Pink
         Me.ClientSize = New System.Drawing.Size(782, 403)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.StatusStrip1)

@@ -49,6 +49,7 @@ Public Class NormalMode_Form
     Public CheckOn, ConnectionCheckResult As String
     Public ExistsResult As Boolean = False
     Public MaxRetriesCount, RetryIntervalSec As Integer
+    Public MDT_TargetFile() As String
 
     'MainForm読み込み時(起動時)の処理
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -62,8 +63,6 @@ Public Class NormalMode_Form
         RetryIntervalSec = GetPrivateProfileInt("ConnectionCheck", "RetryIntervalSec", 30, iniFileName)
 
         Me.ClientSize = My.Settings.MainForm_WindowSize
-        'SourcePath_TextBox.Text = Config.SourcePath
-
 
     End Sub
 
@@ -73,7 +72,6 @@ Public Class NormalMode_Form
 
         If SelectFolderDialog.ShowDialog() = DialogResult.OK Then
             SourcePath_TextBox.Text = SelectFolderDialog.SelectedFolder
-            'Config.SourcePath = SelectFolderDialog.SelectedFolder
         End If
     End Sub
 
@@ -83,52 +81,51 @@ Public Class NormalMode_Form
 
         If SelectFolderDialog.ShowDialog() = DialogResult.OK Then
             DestPath_TextBox.Text = SelectFolderDialog.SelectedFolder
-            'Config.DestPath = SelectFolderDialog.SelectedFolder
         End If
     End Sub
 
 
-    Function FolderSearch(ByRef Path As String) As String()
-        Dim tmpAry As String()
-        tmpAry = System.IO.Directory.GetDirectories(Path, "*", System.IO.SearchOption.TopDirectoryOnly)
-        For i As Integer = 0 To tmpAry.Length - 1
-            'FolderList.Add(tmpAry(i))
-        Next
+    'Function FolderSearch(ByRef Path As String) As String()
+    '    Dim tmpAry As String()
+    '    tmpAry = System.IO.Directory.GetDirectories(Path, "*", System.IO.SearchOption.TopDirectoryOnly)
+    '    For i As Integer = 0 To tmpAry.Length - 1
+    '        'FolderList.Add(tmpAry(i))
+    '    Next
 
-        For Each Folder In tmpAry
-            If InStr(Folder, "済み", CompareMethod.Text) <= 0 Then
-                FolderSearch(Folder)
-            End If
-        Next
+    '    For Each Folder In tmpAry
+    '        If InStr(Folder, "済み", CompareMethod.Text) <= 0 Then
+    '            FolderSearch(Folder)
+    '        End If
+    '    Next
 
-        'FolderSearch = FolderList.ToArray
+    '    'FolderSearch = FolderList.ToArray
 
-    End Function
+    'End Function
 
 
     Sub Start_ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Start_ToolStripMenuItem.Click
-        Dim SearchFolderPath As String = SourcePath_TextBox.Text
+        'Dim SearchFolderPath As String = SourcePath_TextBox.Text
 
 
 
-        If Not SourcePath_TextBox.Text = "" Then
-            'Dim t As New ThreadClass(TextBox1.Text, TextBox2.Text, "", "", TextBox1.Text)
-            't = New Thread(New ParameterizedThreadStart(AddressOf ConnectionCheck))
+        'If Not SourcePath_TextBox.Text = "" Then
+        '    'Dim t As New ThreadClass(TextBox1.Text, TextBox2.Text, "", "", TextBox1.Text)
+        '    't = New Thread(New ParameterizedThreadStart(AddressOf ConnectionCheck))
 
-            't.IsBackground = True
-            't.Start(TextBox1.Text, "監視対象フォルダー")
+        '    't.IsBackground = True
+        '    't.Start(TextBox1.Text, "監視対象フォルダー")
 
-        End If
+        'End If
 
-        Dim ProcessTime As DateTime
-        For i = 0 To 2
-            ProcessTime = Now
-            DestPath_TextBox.Text = DestPath_TextBox.Text &
-                            ProcessTime & vbCrLf &
-                            "[Copy completed.] 202211111111111111111111111.prn >> 202211111111111111111111111.prn" & vbCrLf &
-                            vbCrLf
-        Next
-
+        'Dim ProcessTime As DateTime
+        'For i = 0 To 2
+        '    ProcessTime = Now
+        '    DestPath_TextBox.Text = DestPath_TextBox.Text &
+        '                    ProcessTime & vbCrLf &
+        '                    "[Copy completed.] 202211111111111111111111111.prn >> 202211111111111111111111111.prn" & vbCrLf &
+        '                    vbCrLf
+        'Next
+        Module_for_MDT.FileWatcher.Main(SourcePath_TextBox.Text, True)
 
     End Sub
 
@@ -141,16 +138,19 @@ Public Class NormalMode_Form
         Stop_ToolStripMenuItem.Enabled = False
         Stop_ToolStripMenuItem.Checked = True
         StatusText.Text = "監視停止中"
+
     End Sub
 
 
     Private Sub MainForm_Closed(sender As Object, e As EventArgs) Handles Me.Closed
-        My.Settings.MainForm_WindowSize = Me.ClientSize
+        'My.Settings.MainForm_WindowSize = Me.ClientSize
 
         'If Not IsNothing(t) Then
         '    t.Abort()
         '    t.Join()
         'End If
+        Module_for_MDT.FileWatcher.Main(SourcePath_TextBox.Text, False)
+
     End Sub
 
 
