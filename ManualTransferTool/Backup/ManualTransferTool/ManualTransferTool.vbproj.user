@@ -1,6 +1,0 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <ProjectView>ShowAllFiles</ProjectView>
-    <ReferencePath>C:\Windows\Microsoft.NET\Framework\v1.0.3705\;C:\Windows\Microsoft.NET\Framework\v1.1.4322\;C:\Windows\Microsoft.NET\Framework\v2.0.50727\</ReferencePath>
-  </PropertyGroup>
-</Project>
